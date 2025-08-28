@@ -305,6 +305,7 @@ function addMessageToUI(node) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${node.role}`;
     messageDiv.dataset.nodeId = node.id;
+    messageDiv.dataset.rawContent = node.content;
 
     // Create the content container first
     const contentDiv = document.createElement('div');
@@ -593,6 +594,9 @@ Predicted per Second: ${timingsData.predicted_per_second ? timingsData.predicted
             case 'content':
                 markdownBuffer += data.content;
                 contentDiv.innerHTML = `<div class="markdown-content">` + marked.parse(markdownBuffer) + `</div>`;
+                document.querySelectorAll('pre code').forEach((block) => {
+                    delete block.dataset.highlighted;
+                });
                 hljs.highlightAll();
                 scrollToBottom();
                 break;
@@ -623,7 +627,7 @@ Predicted per Second: ${timingsData.predicted_per_second ? timingsData.predicted
 
                 // Add action buttons - include continue since this is now the last message
                 assistantDiv.dataset.nodeId = data.node_id;
-                assistantDiv.dataset.rawContent = data.raw_content || contentDiv.textContent;
+                assistantDiv.dataset.rawContent = markdownBuffer;
                 assistantDiv.innerHTML += `
                             <div class="message-actions">
                                 <button class="action-btn" onclick="editMessage('${data.node_id}', 'assistant')">Edit</button>

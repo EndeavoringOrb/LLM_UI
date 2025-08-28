@@ -28,7 +28,7 @@ load_dotenv()
 import os
 
 app = Flask(__name__)
-app.secret_key = os.getenv("FLASK_SECRET_KEY")
+app.config['SECRET_KEY'] = os.getenv("FLASK_SECRET_KEY")
 APP_PASSWORD = os.getenv("APP_PASSWORD")
 app.config["UPLOAD_FOLDER"] = os.getenv("UPLOAD_FOLDER", "uploads")
 app.config["MAX_CONTENT_LENGTH"] = int(

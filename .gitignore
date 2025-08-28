@@ -1,0 +1,8 @@
+old
+__pycache__
+tmp*
+chats.pkl
+.venv
+.env
+uploads
+scripts

@@ -1,0 +1,4 @@
+requests
+googlesearch-python
+flask
+python-dotenv

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Chat UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="chat-section">
+            <div class="chat-header">
+                <h3>Chat History</h3>
+                <button class="new-chat-btn" onclick="createNewChat()">+ New Chat</button>
+            </div>
+            <div id="chat-list"></div>
+        </div>
+
+        <div class="tools-section">
+            <h3>Tools</h3>
+            <div id="tools-list"></div>
+        </div>
+
+        <div class="file-list">
+            <h3>Files</h3>
+            <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                <p>Click to upload files</p>
+                <input type="file" id="file-input" multiple>
+            </div>
+            <div id="files-list"></div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="chat-header-main">
+            <h2 id="chat-title">New Chat</h2>
+        </div>
+
+        <div class="chat-container" id="chat-container">
+            <!-- Messages will be added here dynamically -->
+        </div>
+
+        <div class="input-container">
+            <div class="current-files" id="current-files"></div>
+            <div class="input-wrapper">
+                <textarea class="message-input" id="message-input" placeholder="Type your message..."
+                    rows="1"></textarea>
+                <button class="send-btn" id="send-btn">Send</button>
+                <button class="stop-btn" id="stop-btn" style="display: none;">Stop</button>
+            </div>
+        </div>
+
+        <div class="status-bar" id="status-bar">Ready</div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="edit-modal" id="edit-modal">
+        <div class="edit-content">
+            <h3>Edit Message</h3>
+            <textarea class="edit-textarea" id="edit-textarea"></textarea>
+            <div class="current-files" id="edit-files"></div>
+            <div class="edit-actions">
+                <button class="edit-btn edit-cancel" onclick="closeEditModal()">Cancel</button>
+                <button class="edit-btn edit-save" onclick="saveEdit()">Save</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

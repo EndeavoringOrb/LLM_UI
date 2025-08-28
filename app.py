@@ -217,7 +217,7 @@ def format_message_content(message_content: str, files: List[str]) -> List[Dict]
                 print(f"Error encoding image {file_info['filename']}: {e}")
                 content.append(
                     {
-                        "type": "input_text",
+                        "type": "text",
                         "text": f"[Error loading image: {file_info['filename']}]",
                     }
                 )
@@ -227,7 +227,7 @@ def format_message_content(message_content: str, files: List[str]) -> List[Dict]
             if file_content:
                 content.append(
                     {
-                        "type": "input_text",
+                        "type": "text",
                         "text": f"File: {file_info.get('filename', 'unknown')}\n{file_content}",
                     }
                 )

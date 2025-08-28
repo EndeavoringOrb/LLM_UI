@@ -9,6 +9,7 @@ let currentEventSource = null;
 let autoScrollEnabled = true;
 let userHasScrolled = false;
 
+
 // Initialize
 document.addEventListener('DOMContentLoaded', function () {
     loadTools();
@@ -18,6 +19,33 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 function setupEventListeners() {
+    // Get the upload area element
+    const uploadArea = document.querySelector('.upload-area');
+
+    // Highlight the area when dragging files over it
+    uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadArea.classList.add('drag-over'); // Optional: add a visual highlight
+    });
+
+    // Remove highlight when leaving the area
+    uploadArea.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadArea.classList.remove('drag-over');
+    });
+
+    // Handle dropped files
+    uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        uploadArea.classList.remove('drag-over');
+
+        const files = e.dataTransfer.files;
+        handleFileUpload({ target: { files } }); // reuse your existing handler
+    });
+
     // Send button
     document.getElementById('send-btn').addEventListener('click', sendMessage);
 

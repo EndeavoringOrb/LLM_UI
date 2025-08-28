@@ -1,19 +1,12 @@
 import json
 import requests
 from tools import TOOLS
+from dotenv import load_dotenv
 
-LLAMA_URL = (
-    "http://endeavoringorb.com:11434/v1/chat/completions"  # llama-server endpoint
-)
+load_dotenv()
+import os
 
-
-import json
-import requests
-from tools import TOOLS
-
-LLAMA_URL = (
-    "http://endeavoringorb.com:11434/v1/chat/completions"  # llama-server endpoint
-)
+LLAMA_URL = os.getenv("LLAMA_URL")
 
 
 # --------------------
